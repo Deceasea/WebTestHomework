@@ -20,11 +20,15 @@ public class SearchPage extends AbstractPage{
         super(driver);
     }
 
-    public void toSearch(String value){
-        fieldSearch.click();
-        new WebDriverWait(getDriver(), Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(buttonSearch));
-        fieldSearch.sendKeys(value);
-        buttonSearch.submit();
+    public void toSearch(String value) throws MyException {
+        try {
+            fieldSearch.click();
+            new WebDriverWait(getDriver(), Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(buttonSearch));
+            fieldSearch.sendKeys(value);
+            buttonSearch.submit();
+        }catch(Exception e){
+            throw new MyException(e.getMessage());
+        }
     }
 
     public void buttonSearch(int i) {
